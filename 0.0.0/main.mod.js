@@ -39,6 +39,62 @@ class polyLibrary extends PolyMod {
             position: absolute;
             left: calc(50% - 1000px / 2);
             background: #28346a;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .top-text {
+            margin: 10px 10px 0 10px;
+            padding: 0;
+            font-weight: normal;
+            font-size: 50px;
+            text-align: center;
+            color: white;
+        }
+        .tag-div {
+            background: #212b58;
+            width: 960px;
+            height: 50px;
+            white-space: nowrap;
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            color: white;
+            align-items: center;
+            padding: 20px;
+            gap: 40px;
+            display: flex;
+            flex-direction: row;
+        }
+        .library-back-button {
+            margin: 10px;
+            padding: 10px 20px;
+            float: left;
+        }
+        .library-add-button {
+            margin: 10px;
+            padding: 10px 20px;
+            float: right;
+        }
+        .library-list {
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+            background-color: #212b58;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            pointer-events: auto;
+        }
+        .tag-box {
+            height: 75%;
+            width: 100px;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+            display: flex;
+            align-items: center;
+            background: #112052;
+            justify-content: center;
+            padding: 0 70px;
         }
         `;
         
@@ -59,7 +115,7 @@ class polyLibrary extends PolyMod {
         baseDiv.appendChild(libraryOpenText);
             
         const libraryOpenButton = document.createElement("button");
-        libraryOpenButton.className = "library-open-button"
+        libraryOpenButton.className = "library-open-button button"
         libraryOpenButton.textContent = "Open";  
         libraryOpenButton.onclick = () => {
             document.getElementsByClassName("track-info")[0].remove();
@@ -75,7 +131,63 @@ class polyLibrary extends PolyMod {
         baseDiv.className = "library-div";
 
         uiDiv.appendChild(baseDiv);
+
+        const topText = document.createElement("h2");
+        topText.textContent = "Mod Library";
+        topText.className = "top-text";
+
+        baseDiv.appendChild(topText);
+
+        const tagDiv = document.createElement("div");
+        tagDiv.className = "tag-div";
+
+        baseDiv.appendChild(tagDiv);
+
+        const listDiv = document.createElement("div");
+        listDiv.className = "library-list"
+
+        baseDiv.appendChild(listDiv);
+
+        const bottomDiv = document.createElement("div");
+        bottomDiv.className = "bottom-bar";
+        bottomDiv.style.marginTop = "auto";
+
+        baseDiv.appendChild(bottomDiv)
+        
+        const backButton = document.createElement("button");
+        backButton.className =  "library-back-button button";
+        backButton.innerHTML = `<img src="images/back.svg"> Back`;
+
+        bottomDiv.appendChild(backButton);
+
+        const addButton = document.createElement("button");
+        addButton.className =  "library-add-button button";
+        addButton.innerHTML = `<img src="images/checkmark.svg"> Add`;
+
+        bottomDiv.appendChild(addButton);
+
+        const library = this.getLibrary();
+
+        const allTagBox = document.createElement("button");
+        allTagBox.textContent = "All";
+        allTagBox.className = "tag-box button";
+        tagDiv.appendChild(allTagBox);
+        
+        for (const tag of library.tags) {
+            const tagBox = document.createElement("button");
+            tagBox.textContent = tag;
+            tagBox.className = "tag-box button";
+
+            tagDiv.appendChild(tagBox);
+        }
     };
+
+    getLibrary = function() {
+        return {
+            tags: ["Editor", "Car", "UI"],
+            mods: []
+        }
+    }
 
     init = (pml) => {    
         pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `ActivePolyModLoader.getMod("${this.modID}").createUI();`);
