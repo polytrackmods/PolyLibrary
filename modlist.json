@@ -12,13 +12,13 @@
     "tags": ["UI"]
   },
   "coolcars": {
-    "url": "https://raw.githubusercontent.com/CRJakob/jakobspolymods/main/coolcars",
+    "url": "https://pml.crjakob.com/CRJakob/jakobspolymods/main/coolcars",
     "name": "Cool Cars",
     "author": "CRJakob",
     "tags": ["Car"]
   },
   "goofycars": {
-    "url": "https://raw.githubusercontent.com/CRJakob/jakobspolymods/main/goofycars",
+    "url": "https://pml.crjakob.com/CRJakob/jakobspolymods/main/goofycars",
     "name": "Goofy Cars",
     "author": "CRJakob",
     "tags": ["Car"]
