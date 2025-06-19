@@ -3,66 +3,66 @@
     "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/polyproxy",
     "name": "Poly Proxy",
     "author": "Orangy",
-    "tags": ["other"]
+    "tags": ["Other"]
   },
   "3decspeed": {
     "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/3decspeed",
     "name": "3 Decimal Speedometer",
     "author": "Sebas + Orangy",
-    "tags": ["ui"]
+    "tags": ["UI"]
   },
   "coolcars": {
     "url": "https://raw.githubusercontent.com/CRJakob/jakobspolymods/main/coolcars",
     "name": "Cool Cars",
     "author": "CRJakob",
-    "tags": ["car"]
+    "tags": ["Car"]
   },
   "goofycars": {
     "url": "https://raw.githubusercontent.com/CRJakob/jakobspolymods/main/goofycars",
     "name": "Goofy Cars",
     "author": "CRJakob",
-    "tags": ["car"]
+    "tags": ["Car"]
   },
   "husplits": {
     "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/husplits",
     "name": "Heads Up Splits",
     "author": "Orangy",
-    "tags": ["ui"]
+    "tags": ["UI"]
   },
   "noitalics": {
     "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/noitalics",
     "name": "No Italics",
     "author": "Orangy",
-    "tags": ["ui"]
+    "tags": ["UI"]
   },
   "errpopups": {
     "url": "https://raw.githubusercontent.com/GameBuilder202/PolyDebug/main",
     "name": "PolyDebug",
     "author": "Aeritalia",
-    "tags": ["ui", "other"]
+    "tags": ["UI", "Other"]
   },
   "polyeditor": {
     "url": "https://codeberg.org/polytrackmods/PolyEditor/raw/branch/main",
     "name": "Advanced PolyEditor",
     "author": "Cwcinc + CRJakob + Orangy",
-    "tags": ["editor"]
+    "tags": ["Editor"]
   },
   "carswitcher": {
     "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/carswitcher",
     "name": "Car Switcher",
     "author": "Orangy",
-    "tags": ["car"]
+    "tags": ["Car"]
   },
   "ghosttoggle": {
     "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/ghosttoggle",
     "name": "Mid Run Ghost Toggle",
     "author": "Cwcinc + Orangy",
-    "tags": ["car"]
+    "tags": ["Car"]
   },
   "pdip": {
     "url": "https://raw.githubusercontent.com/polytrackmods/PolyDip--/main",
     "name": "PolyDip--",
     "author": "DoraChad + Orangy",
-    "tags": ["other"]
+    "tags": ["UI", "Other"]
   }
 }
