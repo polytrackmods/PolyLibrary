@@ -62,7 +62,7 @@ class polyLibrary extends PolyMod {
         };
 
         init = (pml) => {    
-                pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `ActivePolyModLoader.getMod(${this.modID}).createUI();`);
+                pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `ActivePolyModLoader.getMod("${this.modID}").createUI();`);
     }
 }
 export let polyMod = new polyLibrary();
