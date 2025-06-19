@@ -36,13 +36,13 @@
     "tags": ["UI"]
   },
   "polydebug": {
-    "url": "https://codeberg.org/GameBuilder202/PolyDebug/raw/branch/main",
+    "url": "https://pml.crjakob.com/GameBuilder202/PolyDebug/main",
     "name": "PolyDebug",
     "author": "Aeritalia",
     "tags": ["UI", "Other"]
   },
   "polyeditor": {
-    "url": "https://codeberg.org/polytrackmods/PolyEditor/raw/branch/main",
+    "url": "https://pml.crjakob.com/polytrackmods/PolyEditor/main/",
     "name": "Advanced PolyEditor",
     "author": "Cwcinc + CRJakob + Orangy",
     "tags": ["Editor"]
