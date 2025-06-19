@@ -35,8 +35,8 @@
     "author": "Orangy",
     "tags": ["UI"]
   },
-  "errpopups": {
-    "url": "https://raw.githubusercontent.com/GameBuilder202/PolyDebug/main",
+  "polydebug": {
+    "url": "https://codeberg.org/GameBuilder202/PolyDebug/raw/branch/main",
     "name": "PolyDebug",
     "author": "Aeritalia",
     "tags": ["UI", "Other"]
