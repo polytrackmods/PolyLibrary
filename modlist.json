@@ -1,12 +1,12 @@
 {
   "polyproxy": {
-    "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/polyproxy",
+    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/polyproxy",
     "name": "Poly Proxy",
     "author": "Orangy",
     "tags": ["Other"]
   },
   "3decspeed": {
-    "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/3decspeed",
+    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/3decspeed",
     "name": "3 Decimal Speedometer",
     "author": "Sebas + Orangy",
     "tags": ["UI"]
@@ -24,13 +24,13 @@
     "tags": ["Car"]
   },
   "husplits": {
-    "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/husplits",
+    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/husplits",
     "name": "Heads Up Splits",
     "author": "Orangy",
     "tags": ["UI"]
   },
   "noitalics": {
-    "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/noitalics",
+    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/noitalics",
     "name": "No Italics",
     "author": "Orangy",
     "tags": ["UI"]
@@ -48,25 +48,25 @@
     "tags": ["Editor"]
   },
   "carswitcher": {
-    "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/carswitcher",
+    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/carswitcher",
     "name": "Car Switcher",
     "author": "Orangy",
     "tags": ["Car"]
   },
   "ghosttoggle": {
-    "url": "https://raw.githubusercontent.com/0rangy/OrangysPolyMods/main/ghosttoggle",
+    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/ghosttoggle",
     "name": "Mid Run Ghost Toggle",
     "author": "Cwcinc + Orangy",
     "tags": ["Car"]
   },
   "pdip": {
-    "url": "https://raw.githubusercontent.com/polytrackmods/PolyDip--/main",
+    "url": "https://pml.orangy.cfd/polytrackmods/PolyDip--/main",
     "name": "PolyDip--",
     "author": "DoraChad + Orangy",
     "tags": ["UI", "Other"]
   },
   "plibrary": {
-    "url": "https://raw.githubusercontent.com/polytrackmods/PolyLibrary/main",
+    "url": "https://pml.orangy.cfd/polytrackmods/PolyLibrary/main",
     "name": "Poly Library",
     "author": "DoraChad",
     "tags": ["Other"]
