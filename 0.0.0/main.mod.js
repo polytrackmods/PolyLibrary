@@ -2,6 +2,13 @@ import { PolyMod, MixinType } from "https://pml.orangy.cfd/PolyTrackMods/PolyMod
 
 class polyLibrary extends PolyMod {
 
+    listDiv;
+    tagDiv;
+    loader;
+    apml;
+    soundInst;
+    tagButtons = [];
+    
     createUI = function() {
         const uistyle = document.createElement("style");
         uistyle.textContent = `
@@ -80,14 +87,20 @@ class polyLibrary extends PolyMod {
         .library-list {
             margin: 0;
             padding: 0;
-            flex-grow: 1;
+            flex: 1;
             background-color: #212b58;
             overflow-x: hidden;
             overflow-y: scroll;
             pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: white;
+            text-align: center;
         }
         .tag-box {
-            height: 75%;
+            height: 100%;
             width: 100px;
             clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
             display: flex;
@@ -95,6 +108,39 @@ class polyLibrary extends PolyMod {
             background: #112052;
             justify-content: center;
             padding: 0 70px;
+        }
+        .mini-tag {
+            padding: 0 20px;
+            height: 20px;
+            width: 50px;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+            display: flex;
+            align-items: center;
+            background: #28346a;
+            justify-content: center;
+            margin: 10px 0px 20px 20px;
+            font-size: 20px;
+        }
+        .library-entry {
+            display: flex;
+            height: 180px;
+            width: 925px;
+            background: #112052;
+            flex-shrink: 0;
+            color: white;
+            align-items: center;
+        }
+        .library-text-holder {
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            text-align: left;
+            gap: 20px;
+            margin-bottom: auto;
+            align-items: end;
+        }
+        .select-tag {
+            background: #334b77;
         }
         `;
         
@@ -126,7 +172,9 @@ class polyLibrary extends PolyMod {
         baseDiv.appendChild(libraryOpenButton);
     };
 
-    libraryUI = function(uiDiv) {
+
+    libraryUI = async function(uiDiv) {
+        
         const baseDiv = document.createElement("div");
         baseDiv.className = "library-div";
 
@@ -138,15 +186,15 @@ class polyLibrary extends PolyMod {
 
         baseDiv.appendChild(topText);
 
-        const tagDiv = document.createElement("div");
-        tagDiv.className = "tag-div";
+        this.tagDiv = document.createElement("div");
+        this.tagDiv.className = "tag-div";
 
-        baseDiv.appendChild(tagDiv);
+        baseDiv.appendChild(this.tagDiv);
 
-        const listDiv = document.createElement("div");
-        listDiv.className = "library-list"
+        this.listDiv = document.createElement("div");
+        this.listDiv.className = "library-list"
 
-        baseDiv.appendChild(listDiv);
+        baseDiv.appendChild(this.listDiv);
 
         const bottomDiv = document.createElement("div");
         bottomDiv.className = "bottom-bar";
@@ -157,40 +205,296 @@ class polyLibrary extends PolyMod {
         const backButton = document.createElement("button");
         backButton.className =  "library-back-button button";
         backButton.innerHTML = `<img src="images/back.svg"> Back`;
+        backButton.onclick = () => {
+            baseDiv.remove();
+            this.apml.getMod("pmlcore").createModScreen(this.soundInst);
+            this.createUI();
+        };
 
         bottomDiv.appendChild(backButton);
 
         const addButton = document.createElement("button");
         addButton.className =  "library-add-button button";
-        addButton.innerHTML = `<img src="images/checkmark.svg"> Add`;
+        addButton.innerHTML = `<img src="images/import.svg"> Refresh`;
+        addButton.onclick = async () => {
+            this.listDiv.innerHTML = '';
+
+            this.loader = document.createElement("p");
+            this.loader.textContent = "Loading Library...";
+            this.loader.id = "library-load";
+    
+            this.listDiv.appendChild(this.loader);
+
+            await this.getLibrary(true);
+        };
 
         bottomDiv.appendChild(addButton);
 
-        const library = this.getLibrary();
+        this.loader = document.createElement("p");
+        this.loader.textContent = "Loading Library...";
+        this.loader.id = "library-load";
 
+        this.listDiv.appendChild(this.loader);
+
+        await this.getLibrary();
+    };
+
+    createTags = function(tagList) {
         const allTagBox = document.createElement("button");
         allTagBox.textContent = "All";
-        allTagBox.className = "tag-box button";
-        tagDiv.appendChild(allTagBox);
+        allTagBox.className = "tag-box button select-tag";
+        allTagBox.onclick = () => {
+            for (const child of this.listDiv.children) {
+                child.style.display = "flex";
+            };
+        };
+
+        this.tagButtons.push(allTagBox);
         
-        for (const tag of library.tags) {
+        this.tagDiv.appendChild(allTagBox);
+        
+        for (const tag of tagList) {
             const tagBox = document.createElement("button");
             tagBox.textContent = tag;
             tagBox.className = "tag-box button";
+            tagBox.id = tag;
+            tagBox.onclick = () => {
+                this.tagVisibility(tag, tagList);
+            };
 
-            tagDiv.appendChild(tagBox);
+            this.tagDiv.appendChild(tagBox);
+
+            this.tagButtons.push(tagBox);
         }
     };
 
-    getLibrary = function() {
-        return {
-            tags: ["Editor", "Car", "UI"],
-            mods: []
+    tagVisibility = function(curtag, allTags) {
+       
+        const index = allTags.indexOf(curtag);
+        if (index === -1) return;
+        const otherTags = allTags.slice(); 
+        otherTags.splice(index, 1);
+        otherTags.forEach((tag) => {
+            const tagEntries = document.getElementsByClassName(tag);
+            for (const element of tagEntries) {
+                element.style.display = "none";
+            };
+        });
+
+        const showtag = document.getElementsByClassName(curtag);
+        for (const element of showtag) {
+            element.style.display = "flex";
+        };
+
+        this.tagButtons.forEach((button) => {
+            button.id === curtag ? button.classList.add("select-tag") : button.classList.remove("select-tag");
+        })
+
+    };
+
+    getLibrary = async function(bypass=false) {
+        const modlistUrl = 'https://raw.githubusercontent.com/polytrackmods/PolyLibrary/main/modlist.json';
+        
+        const modlistResponse = await fetch(modlistUrl);
+        if (!modlistResponse.ok) throw new Error("Failed to fetch modlist.json");
+        
+        const mods = await modlistResponse.json();
+
+        await this.getModInfo(mods, bypass);
+    };
+
+    createModEntry = function(modId, modName, modAuthor, modIcon, modVersions, tags) {
+        const entry = document.createElement("div");
+        entry.className = `library-entry button ${tags.join(" ")}`;
+
+        this.listDiv.appendChild(entry)
+
+        entry.appendChild(modIcon);
+
+        const bigDiv = document.createElement("div");
+        bigDiv.className = "content-div";
+        bigDiv.style.textAlign = "left";
+
+        entry.appendChild(bigDiv)
+
+        const textDiv = document.createElement("div");
+        textDiv.className = "library-text-holder";
+
+        bigDiv.appendChild(textDiv)
+
+        const modNameLib = document.createElement("h2");
+        modNameLib.textContent = modName;
+        modNameLib.style.fontSize = "40px";
+        modNameLib.style.margin = "0";
+        modNameLib.style.textDecoration = "underline";
+        modNameLib.style.fontStyle = "normal";
+
+        textDiv.appendChild(modNameLib);
+
+        const modAuthorLib = document.createElement("p");
+        modAuthorLib.textContent = `By: ${modAuthor}`;
+        modAuthorLib.style.fontSize = "20px";
+        modAuthorLib.style.margin = "0";
+
+        textDiv.appendChild(modAuthorLib);
+
+        const versionsDiv = document.createElement("p");
+        versionsDiv.textContent = Object.keys(modVersions).join(", ");
+        versionsDiv.style.margin = "0";
+        versionsDiv.style.padding = "20px 0px 0 30px";
+        versionsDiv.style.fontSize = "20px";
+
+        bigDiv.appendChild(versionsDiv);
+
+        const modTags = document.createElement("div");
+        modTags.style.display = "flex";
+        modTags.style.flexDirection = "row";
+        tags.forEach((tag) => {
+            const tagBox = document.createElement("div");
+            tagBox.textContent = tag;
+            tagBox.className = "mini-tag";
+
+            modTags.appendChild(tagBox);
+        });
+
+        bigDiv.appendChild(modTags);
+    };
+
+    fetchURLS = async function(mods) {
+        const entries = Object.entries(mods);
+    
+        const results = await Promise.all(
+            entries.map(async ([modId, mod]) => {
+                const url = mod.url + "/latest.json";
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`Failed to fetch ${url}`);
+                const latest = await res.json();
+    
+                return [modId, {
+                    latest,
+                    website: mod.url.includes("pml.crjakob.com")
+                        ? "codeberg"
+                        : mod.url.includes("raw.githubusercontent.com")
+                        ? "github"
+                        : "unknown",
+                    baseUrl: mod.url,
+                    tags: mod.tags || []
+                }];
+            })
+        );
+    
+        const modsMap = {};
+        for (const [modId, modData] of results) {
+            modsMap[modId] = modData;
         }
-    }
+    
+        // Compose the final cached object
+        const cache = {
+            lastUpdate: new Date().toISOString(),
+            mods: modsMap
+        };
+    
+        localStorage.setItem("polylibrary_list_cache", JSON.stringify(cache));
+        return cache;
+    };
+
+    getIcons = function(mods) {
+        const polyVersion = this.polyVersion[0];
+        const iconMap = {};
+
+    
+        for (const [modId, modInfo] of Object.entries(mods)) {
+            const latest = modInfo.latest;
+            if (!latest) {
+                console.warn(`No latest info for mod ${modId}`);
+                continue;
+            }
+            const version = latest[polyVersion];
+            if (!version) {
+                console.warn(`No version found for polyVersion ${polyVersion} in mod ${modId}`);
+                continue;
+            }
+    
+           
+            const baseUrl = modInfo.baseUrl;
+            const iconUrl = `${baseUrl}/${version}/icon.png`;
+    
+    
+            const img = document.createElement("img");
+            img.src = iconUrl;
+            img.style.height = "150px";
+    
+            iconMap[modId] = img;
+        }
+    
+        return iconMap;
+    };
+
+
+    getModInfo = async function(mods, bypass=false) {
+        let modlatest;
+        if (bypass) {
+            modlatest = await this.fetchURLS(mods)
+
+            const icons = this.getIcons(modlatest.mods);
+
+            this.loader.remove(this.loader);
+            
+            Object.entries(mods).forEach(([modId, modInfo]) => {
+                this.createModEntry(modId, modInfo.name, modInfo.author, icons[modId], modlatest.mods[modId].latest, modlatest.mods[modId].tags);
+                console.log(`Mod ID: ${modId}`);
+            });
+
+            return;
+        }
+        const cacheStr = localStorage.getItem("polylibrary_list_cache");
+        if (cacheStr) {
+          const cache = JSON.parse(cacheStr);
+          const lastUpdate = new Date(cache.lastUpdate);
+          const now = new Date();
+        
+          const diffMs = now - lastUpdate;
+          const oneHourMs = 1000 * 60 * 60;
+        
+          if (diffMs >= oneHourMs) {
+            modlatest = await this.fetchURLS(mods)
+          } else {
+            modlatest = cache;
+          }
+        } else {
+          modlatest = await this.fetchURLS(mods)
+        }
+
+        const icons = this.getIcons(modlatest.mods);
+
+        const tagSet = new Set();
+        Object.values(modlatest.mods).forEach(mod => {
+            if (Array.isArray(mod.tags)) {
+                mod.tags.forEach(tag => tagSet.add(tag));
+            }
+        });
+
+        let allTags = Array.from(tagSet).sort((a, b) => {
+            if (a === "Other") return 1;
+            if (b === "Other") return -1;
+            return a.localeCompare(b);
+        });
+
+        this.createTags(Array.from(allTags));
+
+        this.loader.remove(this.loader);
+        
+        Object.entries(mods).forEach(([modId, modInfo]) => {
+            this.createModEntry(modId, modInfo.name, modInfo.author, icons[modId], modlatest.mods[modId].latest, modlatest.mods[modId].tags);
+            console.log(`Mod ID: ${modId}`);
+        });
+
+        
+
+    };
 
     init = (pml) => {    
-        pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `ActivePolyModLoader.getMod("${this.modID}").createUI();`);
-    }
+        pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `ActivePolyModLoader.getMod("${this.modID}").soundInst = n;ActivePolyModLoader.getMod("${this.modID}").apml = ActivePolyModLoader;ActivePolyModLoader.getMod("${this.modID}").createUI();`);
+    };
 }
 export let polyMod = new polyLibrary();
