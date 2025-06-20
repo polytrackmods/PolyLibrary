@@ -64,5 +64,17 @@
     "name": "PolyDip--",
     "author": "DoraChad + Orangy",
     "tags": ["UI", "Other"]
+  },
+  "plibrary": {
+    "url": "https://raw.githubusercontent.com/polytrackmods/PolyLibrary/main",
+    "name": "Poly Library",
+    "author": "DoraChad",
+    "tags": ["Other"]
+  },
+  "pmlcore": {
+    "url": "https://pml.crjakob.com/polytrackmods/PolyModLoader/0.5.0/pmlcore",
+    "name": "PML Core",
+    "author": "Orangy",
+    "tags": ["Other"]
   }
 }
