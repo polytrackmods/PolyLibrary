@@ -8,7 +8,12 @@ class polyLibrary extends PolyMod {
     apml;
     soundInst;
     tagButtons = [];
-    
+    iconMap;
+    changelog;
+    vers;
+    polylibreturn;
+
+    //Initial UI creation
     createUI = function() {
         const uistyle = document.createElement("style");
         uistyle.textContent = `
@@ -41,6 +46,7 @@ class polyLibrary extends PolyMod {
             padding: 0;
         }
         .library-div {
+            color: white;
             height: 100%;
             width: 1000px;
             position: absolute;
@@ -79,7 +85,7 @@ class polyLibrary extends PolyMod {
             padding: 10px 20px;
             float: left;
         }
-        .library-add-button {
+        .library-refr-button {
             margin: 10px;
             padding: 10px 20px;
             float: right;
@@ -142,6 +148,65 @@ class polyLibrary extends PolyMod {
         .select-tag {
             background: #334b77;
         }
+        .mod-top {
+            color: white;
+            display: flex;
+            gap: 20px;
+            padding: 30px
+        }
+        .library-add-button {
+            height: 60px;
+            margin-left: auto;
+            width: 175px;
+        }
+        .tab-div {
+            background: #212b58;
+            height: 100px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 150px;
+            justify-content: center;
+            font-size: 30px;
+            align-items: center;
+        }
+        .und-select {
+            text-decoration: underline;
+        }
+        .tab-hidden {
+            display: none !important;
+        }
+        .changelog-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 40px;
+            overflowY: scroll;
+            pointer-events: auto;
+        }
+        .changelog-entry {
+            background: #212b58;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .versions-list {
+            overflow-y: scroll;
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            flex: 1;
+        }
+        .versions-entry {
+            background: #212b58;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
         `;
         
         document.head.appendChild(uistyle);
@@ -151,6 +216,7 @@ class polyLibrary extends PolyMod {
         
         const baseDiv = document.createElement("div");
         baseDiv.className = "mod-library";
+        baseDiv.id = "poly-library"
         
         uiDiv.appendChild(baseDiv);
         
@@ -172,11 +238,12 @@ class polyLibrary extends PolyMod {
         baseDiv.appendChild(libraryOpenButton);
     };
 
-
+    //UI creation after user opens the library menu
     libraryUI = async function(uiDiv) {
         
         const baseDiv = document.createElement("div");
         baseDiv.className = "library-div";
+        baseDiv.id = "library-div";
 
         uiDiv.appendChild(baseDiv);
 
@@ -214,7 +281,7 @@ class polyLibrary extends PolyMod {
         bottomDiv.appendChild(backButton);
 
         const addButton = document.createElement("button");
-        addButton.className =  "library-add-button button";
+        addButton.className =  "library-refr-button button";
         addButton.innerHTML = `<img src="images/import.svg"> Refresh`;
         addButton.onclick = async () => {
             this.listDiv.innerHTML = '';
@@ -239,6 +306,7 @@ class polyLibrary extends PolyMod {
         await this.getLibrary();
     };
 
+    //creation of the bar of tags in the library ui
     createTags = function(tagList) {
         const allTagBox = document.createElement("button");
         allTagBox.textContent = "All";
@@ -268,6 +336,7 @@ class polyLibrary extends PolyMod {
         }
     };
 
+    //responsible for switching tabs in the library ui. This shows/hides all the right mods and switches the tag color to show which is selected
     tagVisibility = function(curtag, allTags) {
        
         const index = allTags.indexOf(curtag);
@@ -291,7 +360,8 @@ class polyLibrary extends PolyMod {
         })
 
     };
-
+    //This is the intial get from the modlist.json in the repo in order to get the mod library contents (info such as urls, name, modid, authors, and tags).
+    //This passes a bypass for when the user clicks refresh, whos purpose is to bypass all the checks for updating
     getLibrary = async function(bypass=false) {
         const modlistUrl = 'https://raw.githubusercontent.com/polytrackmods/PolyLibrary/main/modlist.json';
         
@@ -302,10 +372,20 @@ class polyLibrary extends PolyMod {
 
         await this.getModInfo(mods, bypass);
     };
+    
+    //Creates a mod entry in the list of the mod library
+    createModEntry = function(modId, modName, modInfo, modLatest, icons) {
+        const modAuthor = modInfo.author;
+        const modIcon = icons[modId];
+        const modVersions = modLatest.mods[modId].latest;
+        const tags = modLatest.mods[modId].tags;
 
-    createModEntry = function(modId, modName, modAuthor, modIcon, modVersions, tags) {
-        const entry = document.createElement("div");
+        const entry = document.createElement("button");
         entry.className = `library-entry button ${tags.join(" ")}`;
+        entry.onclick = () => {
+            document.getElementById("library-div").style.display = "none";
+            this.createModUI(modId, modLatest.mods[modId], modIcon, modName, modAuthor, tags);
+        };
 
         this.listDiv.appendChild(entry)
 
@@ -359,7 +439,8 @@ class polyLibrary extends PolyMod {
 
         bigDiv.appendChild(modTags);
     };
-
+    
+    //gets important info from mods such as latest (versions). This happens in batch
     fetchURLS = async function(mods) {
         const entries = Object.entries(mods);
     
@@ -372,16 +453,17 @@ class polyLibrary extends PolyMod {
     
                 return [modId, {
                     latest,
-                    website: mod.url.includes("pml.crjakob.com")
-                        ? "codeberg"
-                        : mod.url.includes("raw.githubusercontent.com")
-                        ? "github"
-                        : "unknown",
+                    //website: mod.url.includes("pml.crjakob.com")
+                    //    ? "codeberg"
+                    //    : mod.url.includes("raw.githubusercontent.com")
+                    //    ? "github"
+                    //    : "unknown",
                     baseUrl: mod.url,
                     tags: mod.tags || []
                 }];
             })
         );
+
     
         const modsMap = {};
         for (const [modId, modData] of results) {
@@ -398,10 +480,11 @@ class polyLibrary extends PolyMod {
         return cache;
     };
 
+    //gets the icons for all the mods. This only happens the first time this menu is opened, as the mod stores the icons (elements) for the later uses.
     getIcons = function(mods) {
+        if (this.iconMap) return this.iconMap;
         const polyVersion = this.polyVersion[0];
-        const iconMap = {};
-
+        this.iconMap = {};
     
         for (const [modId, modInfo] of Object.entries(mods)) {
             const latest = modInfo.latest;
@@ -424,24 +507,25 @@ class polyLibrary extends PolyMod {
             img.src = iconUrl;
             img.style.height = "150px";
     
-            iconMap[modId] = img;
+            this.iconMap[modId] = img;
         }
     
-        return iconMap;
+        return this.iconMap;
     };
 
-
+    //this gets all the mod info and sends it off to be created @createModEntry.
+    //updating info by retrieving the GET urls again only happens once an hour unless bypassed
     getModInfo = async function(mods, bypass=false) {
-        let modlatest;
+        let modLatest;
         if (bypass) {
-            modlatest = await this.fetchURLS(mods)
+            modLatest = await this.fetchURLS(mods)
 
-            const icons = this.getIcons(modlatest.mods);
+            const icons = this.getIcons(modLatest.mods);
 
             this.loader.remove(this.loader);
             
             Object.entries(mods).forEach(([modId, modInfo]) => {
-                this.createModEntry(modId, modInfo.name, modInfo.author, icons[modId], modlatest.mods[modId].latest, modlatest.mods[modId].tags);
+                this.createModEntry(modId, modInfo.name, modInfo, modLatest, icons);
                 console.log(`Mod ID: ${modId}`);
             });
 
@@ -457,18 +541,18 @@ class polyLibrary extends PolyMod {
           const oneHourMs = 1000 * 60 * 60;
         
           if (diffMs >= oneHourMs) {
-            modlatest = await this.fetchURLS(mods)
+            modLatest = await this.fetchURLS(mods)
           } else {
-            modlatest = cache;
+            modLatest = cache;
           }
         } else {
-          modlatest = await this.fetchURLS(mods)
+          modLatest = await this.fetchURLS(mods)
         }
 
-        const icons = this.getIcons(modlatest.mods);
+        const icons = this.getIcons(modLatest.mods);
 
         const tagSet = new Set();
-        Object.values(modlatest.mods).forEach(mod => {
+        Object.values(modLatest.mods).forEach(mod => {
             if (Array.isArray(mod.tags)) {
                 mod.tags.forEach(tag => tagSet.add(tag));
             }
@@ -485,16 +569,448 @@ class polyLibrary extends PolyMod {
         this.loader.remove(this.loader);
         
         Object.entries(mods).forEach(([modId, modInfo]) => {
-            this.createModEntry(modId, modInfo.name, modInfo.author, icons[modId], modlatest.mods[modId].latest, modlatest.mods[modId].tags);
+            this.createModEntry(modId, modInfo.name, modInfo, modLatest, icons);
             console.log(`Mod ID: ${modId}`);
         });
 
         
 
     };
+    //creates a mutation observer watching the div with the main menu buttons in it
+    //when the mod menu is closed, said div will become visible, which will remove this mods ui from this observer
+    createMutation = function() {
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    const wasHidden = mutation.oldValue?.includes("hidden");
+                    const isNowVisible = !target.classList.contains("hidden");
+                    if (wasHidden && isNowVisible) {
+                        document.getElementById("poly-library")?.remove();
+                        observer.disconnect();
+                    }
+                }
+            }
+        });
 
-    init = (pml) => {    
-        pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `ActivePolyModLoader.getMod("${this.modID}").soundInst = n;ActivePolyModLoader.getMod("${this.modID}").apml = ActivePolyModLoader;ActivePolyModLoader.getMod("${this.modID}").createUI();`);
+
+        const targetElement = document.getElementsByClassName("main-buttons-container")[0];
+        observer.observe(targetElement, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+    }
+
+    getHighestVersion = function(latest) {
+      const versions = Object.values(latest);
+    
+      function compareVersions(a, b) {
+        const aParts = a.split('.').map(Number);
+        const bParts = b.split('.').map(Number);
+        const len = Math.max(aParts.length, bParts.length);
+    
+        for (let i = 0; i < len; i++) {
+          const aNum = aParts[i] || 0;
+          const bNum = bParts[i] || 0;
+          if (aNum > bNum) return 1;
+          if (aNum < bNum) return -1;
+        }
+        return 0; // equal
+      }
+    
+      return versions.reduce((maxVer, curVer) => {
+        return compareVersions(curVer, maxVer) > 0 ? curVer : maxVer;
+      }, "0.0.0");
+    }
+
+    //ui creation when clicking on a mod
+    createModUI = async function(modId, thisMod, icon, name, author, tags) {
+        const baseDiv = document.createElement("div");
+        baseDiv.className = "library-div";
+        baseDiv.id = "mod-div";
+
+
+        const topDiv = document.createElement("div");
+        topDiv.className = "mod-top";
+
+        baseDiv.appendChild(topDiv);
+
+        topDiv.appendChild(icon.cloneNode(true));
+
+        const textDiv = document.createElement("div");
+        textDiv.className = "library-text-holder";
+
+        topDiv.appendChild(textDiv)
+
+        const modNameLib = document.createElement("h2");
+        modNameLib.textContent = name;
+        modNameLib.style.fontSize = "40px";
+        modNameLib.style.margin = "0";
+        modNameLib.style.textDecoration = "underline";
+        modNameLib.style.fontStyle = "normal";
+        modNameLib.style.whiteSpace = "nowrap";
+        modNameLib.style.overflow = "hidden";
+        modNameLib.style.textOverflow = "ellipsis";
+        
+
+
+        textDiv.appendChild(modNameLib);
+
+        const modAuthorLib = document.createElement("p");
+        modAuthorLib.textContent = `By: ${author}`;
+        modAuthorLib.style.fontSize = "20px";
+        modAuthorLib.style.margin = "0";
+
+        textDiv.appendChild(modAuthorLib);
+
+        const addButton = document.createElement("button");
+        addButton.className =  "library-add-button button";
+        addButton.innerHTML = `<img src="images/apply.svg"> Add`;
+        addButton.onclick = () => {this.addMod(thisMod.baseUrl)};
+
+        topDiv.appendChild(addButton);
+
+        for (let polyMod of this.apml.getAllMods()) {
+            console.log(polyMod);
+        }
+        
+        if (this.apml.getMod(modId)) {
+            addButton.disabled = true;
+            addButton.style.cursor = "not-allowed"
+        };
+
+        const desc = document.createElement("div");
+        desc.innerHTML = "Loading Description..."
+        desc.style.flex = "1";
+        desc.style.background = "#212b58";
+        desc.style.marginTop = "40px";
+        desc.style.overflowY = "scroll";
+        desc.style.pointerEvents = "auto";
+        desc.style.padding = "20px"
+
+        this.changelog = document.createElement("div");
+        this.changelog.className = "changelog-list tab-hidden";
+
+
+        this.vers = document.createElement("div");
+        this.vers.className = "versions-list tab-hidden"
+
+        const tabsDiv = document.createElement("div");
+        tabsDiv.className = "tab-div";
+
+        baseDiv.appendChild(tabsDiv);
+
+        const tab1 = document.createElement("button");
+        tab1.style.background = "none";
+        tab1.className = "button und-select";
+        tab1.textContent = "Overview";
+        tab1.onclick = () => {
+            this.switchTab(tab1);
+            desc.classList.remove("tab-hidden");
+            this.changelog?.classList.add("tab-hidden");
+            this.vers?.classList.add("tab-hidden");
+        };
+
+        const tab2 = document.createElement("button");
+        tab2.style.background = "none";
+        tab2.className = "button";
+        tab2.textContent = "Changelog";
+        tab2.onclick = () => {
+            this.switchTab(tab2);
+            if (!this.changelog.classList.contains("created")) {this.createChangelog(thisMod)};
+            desc.classList.add("tab-hidden");
+            this.changelog.classList.remove("tab-hidden");
+            this.vers.classList.add("tab-hidden");
+        };
+
+        const tab3 = document.createElement("button");
+        tab3.style.background = "none";
+        tab3.className = "button";
+        tab3.textContent = "Versions";
+        tab3.onclick = () => {
+            this.switchTab(tab3);
+            if (!this.vers.classList.contains("created")) {this.createVersions(thisMod, modId)};
+            desc.classList.add("tab-hidden");
+            this.changelog?.classList.add("tab-hidden");
+            this.vers?.classList.remove("tab-hidden");
+        };
+
+        tabsDiv.appendChild(tab1);
+        tabsDiv.appendChild(tab2);
+        tabsDiv.appendChild(tab3);
+
+        baseDiv.appendChild(desc);
+        baseDiv.appendChild(this.changelog);
+        baseDiv.appendChild(this.vers);
+
+        const bottomDiv = document.createElement("div");
+        bottomDiv.className = "bottom-bar";
+        bottomDiv.style.marginTop = "auto";
+
+        baseDiv.appendChild(bottomDiv)
+        
+        const backButton = document.createElement("button");
+        backButton.className =  "library-back-button button";
+        backButton.innerHTML = `<img src="images/back.svg"> Back`;
+        backButton.onclick = () => {
+            baseDiv.remove();
+            document.getElementById("library-div").style.display = "flex";
+        };
+
+        bottomDiv.appendChild(backButton);
+
+
+        document.getElementById("ui").appendChild(baseDiv);
+
+        const html = await this.getDescription(modId, thisMod);
+
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        
+        const styleTags = tempDiv.querySelectorAll("style");
+        
+        styleTags.forEach(styleTag => {
+          styleTag.textContent = styleTag.textContent.replace(/font-family\s*:\s*[^;]+;?/gi, '');
+        });
+        
+        desc.innerHTML = tempDiv.innerHTML;
+
+    };
+
+    switchTab = function(tab) {
+        document.getElementsByClassName("und-select")[0].classList.remove("und-select");
+        tab.classList.add("und-select");
+    };
+
+    timeAgo = function(dateStr) {
+        const now = new Date();
+        const then = new Date(dateStr);
+        const seconds = Math.floor((now - then) / 1000);
+    
+        const intervals = [
+            { label: 'year',   seconds: 31536000 },
+            { label: 'month',  seconds: 2592000 },
+            { label: 'day',    seconds: 86400 },
+            { label: 'hour',   seconds: 3600 },
+            { label: 'minute', seconds: 60 }
+        ];
+    
+        for (const i of intervals) {
+            const count = Math.floor(seconds / i.seconds);
+            if (count >= 1) {
+                return `Modified ${count} ${i.label}${count !== 1 ? 's' : ''} ago`;
+            }
+        }
+    
+        return 'Modified just now';
+    }
+
+    createVersions = async function(thisMod, modId) {
+        const modUrl = thisMod.baseUrl
+        const path = new URL(modUrl).pathname;
+        const hoster = modUrl.includes("pml.crjakob.com") ? "cb" : modUrl.includes("pml.orangy.cfd") ? "gh" : () => {throw new Error("Unknown hoster")};
+        const url = `https://pmlcached.crjakob.com/${hoster}${path}`
+
+        const loader = document.createElement("p");
+        loader.textContent = "Loading Version History..."
+
+        this.vers.appendChild(loader);
+        
+
+        try {
+            const res = await fetch(url);
+            
+            if (res.status !== 200) {
+                console.log("This mod doesn't have any versions.");
+                loader.textContent = "No Versions Found";
+                return;
+            }
+            
+            const data = await res.json(); // correctly parse the JSON array
+
+           const versionFolders = data
+            .filter(item => item.type === "dir")
+            .filter(item => /^\d+(\.\d+)*$/.test(item.name))
+            .sort((a, b) => {
+                const aParts = a.name.split('.').map(Number);
+                const bParts = b.name.split('.').map(Number);
+                const len = Math.max(aParts.length, bParts.length);
+                for (let i = 0; i < len; i++) {
+                    const aVal = aParts[i] ?? 0;
+                    const bVal = bParts[i] ?? 0;
+                    if (aVal !== bVal) return bVal - aVal;
+                }
+                return 0;
+            });
+        
+            console.log("Version folders:", versionFolders);
+
+            for (const e of versionFolders) {
+                const versionName = e.name;
+                const lastModified = e.last_modified;
+                const manifestUrl = `${thisMod.baseUrl}/${versionName}/manifest.json`;
+            
+                try {
+                    const res = await fetch(manifestUrl);
+                    if (!res.ok) {
+                        console.log("This version doesn't have a manifest file.");
+                        continue;
+                    }
+            
+                    const data = await res.json();
+            
+                    const versiondiv = document.createElement("div");
+                    versiondiv.className = `versions-entry ${versionName}`;
+            
+                    const versionText = document.createElement("p");
+                    versionText.textContent = `Version: ${versionName}`;
+                    versionText.style.padding = "20px";
+                    versionText.style.fontSize = "40px";
+                    versionText.style.margin = "0";
+                    versionText.style.width = "300px";
+            
+                    const supportedPolyVersions = document.createElement("p");
+                    supportedPolyVersions.style.marginLeft = "50px";
+                    supportedPolyVersions.style.width = "100px";
+                    supportedPolyVersions.innerHTML = data.polymod.targets.join("<br>");
+            
+                    const timeStamp = document.createElement("p");
+                    timeStamp.style.marginLeft = "100px";
+                    timeStamp.textContent = this.timeAgo(lastModified);
+            
+                    const addButton = document.createElement("button");
+                    addButton.className = "library-add-button button";
+                    addButton.innerHTML = `<img src="images/apply.svg"> Add`;
+                    addButton.onclick = () => { this.addMod(thisMod.baseUrl, versionName); };
+                    addButton.style.margin = "20px 20px 20px auto";
+                    addButton.style.height = "40px";
+                    addButton.style.width = "130px";
+                    addButton.style.fontSize = "25px";
+
+                    if (this.apml.getMod(modId)) {
+                        addButton.disabled = true;
+                        addButton.style.cursor = "not-allowed";
+                    };
+
+                    if (!data.polymod.targets.includes(this.polyVersion[0]) || (data.polymod?.locked === true)) {
+                        addButton.disabled = true;
+                        versiondiv.style.opacity = "0.5";
+                        versiondiv.style.background = "black";
+                        addButton.style.background = "black";
+                        addButton.style.cursor = "not-allowed";
+                    };
+            
+                    loader.remove();
+            
+                    versiondiv.appendChild(versionText);
+                    versiondiv.appendChild(supportedPolyVersions);
+                    versiondiv.appendChild(timeStamp);
+                    versiondiv.appendChild(addButton);
+                    this.vers.appendChild(versiondiv);
+            
+                } catch (err) {
+                    console.error("Failed to fetch manifest:", err);
+                    continue;
+                }
+            }
+
+            
+        } catch (err) {
+            console.error("Failed to fetch changelog:", err);
+            return "";
+        }
+
+        this.vers.classList.add("created");
+    }
+
+    createChangelog = async function(thisMod) {
+        console.log(thisMod);
+        const url = `${thisMod.baseUrl}/polylib.json`
+
+        const loader = document.createElement("p");
+        loader.textContent = "Loading Changelogs...";
+
+        this.changelog.appendChild(loader);
+        
+        fetch(url)
+          .then((res) => {
+            if (!res.ok) {throw new Error("Network response was not ok");loader.textContent = "No Changelog Files Found"}
+            return res.json();
+          })
+          .then((data) => {
+              
+            Object.keys(data.changelogs).forEach(version => {
+                const versiondiv = document.createElement("div");
+                versiondiv.className = `changelog-entry ${version}`;
+                this.changelog.appendChild(versiondiv);
+
+                const versionText = document.createElement("p");
+                versionText.textContent = `Version: ${version}`;
+                versionText.style.padding = "20px";
+                versionText.style.fontSize = "40px";
+                versionText.style.margin = "0";
+
+                const logText = document.createElement("p")
+                logText.innerHTML = data.changelogs[version];
+                logText.style.padding = "0 20px 20px 20px";
+                logText.style.fontSize = "20px";
+                logText.style.margin = "0";
+
+                lodaer.remove();
+
+                versiondiv.appendChild(versionText);
+                versiondiv.appendChild(logText);
+            });
+          })
+          .catch((err) => {
+            loader.textContent = "No Changelog Files Found";
+            console.error("Fetch error:", err);
+          });
+
+        this.changelog.classList.add("created");
+    };
+
+    addMod = function(modurl, modversion="latest") {
+        this.apml.addMod({ base: modurl, version: modversion, loaded: true })
+        .then(mod => {
+            this.apml.setModLoaded(mod, true);
+            console.info(`✅ Successfully imported: ${modurl}`);
+            document.getElementById("mod-div").remove();
+            document.getElementById("library-div").remove();
+            this.apml.getMod("pmlcore").createModScreen(this.soundInst);
+            this.createUI();
+        })
+        .catch(err => {
+            console.error(`❌ Failed to import ${modurl}: `, err);
+        });
+    };
+
+    getDescription = async function(modId, thisMod) {
+        const version = this.getHighestVersion(thisMod.latest);
+        const url = `${thisMod.baseUrl}/${version}/description.html`;
+        
+        try {
+            const res = await fetch(url);
+            
+            if (res.status !== 200) {
+                console.log("This mod doesn't have a description file.");
+                return "No Description";
+            }
+            
+            const html = await res.text();
+            
+            
+            return html;
+            
+        } catch (err) {
+            console.error("Failed to fetch description:", err);
+            return "No Description";
+        }
+    };
+    
+    init = (pml) => {  
+        pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
+        ActivePolyModLoader.getMod("${this.modID}").soundInst = n;
+        ActivePolyModLoader.getMod("${this.modID}").apml = ActivePolyModLoader;
+        ActivePolyModLoader.getMod("${this.modID}").createUI();
+        ActivePolyModLoader.getMod("${this.modID}").createMutation();`);
     };
 }
 export let polyMod = new polyLibrary();
