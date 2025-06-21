@@ -943,17 +943,19 @@ class polyLibrary extends PolyMod {
 
                 const versionText = document.createElement("p");
                 versionText.textContent = `Version: ${version}`;
-                versionText.style.padding = "20px";
+                versionText.style.padding = "20px 20px 0 20px";
                 versionText.style.fontSize = "40px";
                 versionText.style.margin = "0";
 
+                console.log(data.changelogs[version]);
+                
                 const logText = document.createElement("p")
-                logText.innerHTML = data.changelogs[version];
+                logText.innerHTML = `<ul>${data.changelogs[version].map(item => `<li>${item}</li>`).join("")}</ul>`;
                 logText.style.padding = "0 20px 20px 20px";
                 logText.style.fontSize = "20px";
                 logText.style.margin = "0";
 
-                lodaer.remove();
+                loader.remove();
 
                 versiondiv.appendChild(versionText);
                 versiondiv.appendChild(logText);
