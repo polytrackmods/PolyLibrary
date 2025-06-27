@@ -1,0 +1,8 @@
+{
+  "changelogs": {
+    "0.0.1": [
+      "Fixed changelog list UI not scrolling (overflow)"
+    ]
+  },
+  "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
+}
