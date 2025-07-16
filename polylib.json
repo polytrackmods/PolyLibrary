@@ -3,6 +3,9 @@
     "0.0.1": [
       "Fixed changelog list UI not scrolling (overflow)",
       "Changed background color of logo to orange"
+    ],
+    "0.1.0": [
+      "Updated mod to PolyTrack version 0.5.1"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
