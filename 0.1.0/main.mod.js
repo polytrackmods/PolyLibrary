@@ -376,7 +376,7 @@ class polyLibrary extends PolyMod {
     //Creates a mod entry in the list of the mod library
     createModEntry = function(modId, modName, modInfo, modLatest, icons) {
         const modAuthor = modInfo.author;
-        const modIcon = icons[modId];
+        let modIcon = icons[modId];
         const modVersions = modLatest.mods[modId].latest;
         const tags = modLatest.mods[modId].tags;
 
