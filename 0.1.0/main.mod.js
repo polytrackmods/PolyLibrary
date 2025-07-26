@@ -483,7 +483,7 @@ class polyLibrary extends PolyMod {
     //gets the icons for all the mods. This only happens the first time this menu is opened, as the mod stores the icons (elements) for the later uses.
     getIcons = function(mods) {
         if (this.iconMap) return this.iconMap;
-        const polyVersion = this.polyVersion[0];
+        const polyVersion = "0.5.1";
         this.iconMap = {};
     
         for (const [modId, modInfo] of Object.entries(mods)) {
