@@ -389,7 +389,15 @@ class polyLibrary extends PolyMod {
 
         this.listDiv.appendChild(entry)
 
-        entry.appendChild(modIcon);
+        if (modIcon instanceof Node) {
+            entry.appendChild(modIcon);
+        } else {
+            modIcon = document.createElement("img");
+            modIcon.src = "./images/empty.svg";
+            modIcon.style.height = "150px";
+
+            entry.appendChild(modIcon);
+        }
 
         const bigDiv = document.createElement("div");
         bigDiv.className = "content-div";
@@ -483,7 +491,7 @@ class polyLibrary extends PolyMod {
     //gets the icons for all the mods. This only happens the first time this menu is opened, as the mod stores the icons (elements) for the later uses.
     getIcons = function(mods) {
         if (this.iconMap) return this.iconMap;
-        const polyVersion = "0.5.1";
+        const polyVersion = this.polyVersion[0];
         this.iconMap = {};
     
         for (const [modId, modInfo] of Object.entries(mods)) {
