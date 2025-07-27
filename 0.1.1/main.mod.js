@@ -179,7 +179,7 @@ class polyLibrary extends PolyMod {
         .changelog-list {
             flex: 1;
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             align-items: center;
             padding: 20px;
             gap: 40px;
@@ -196,7 +196,7 @@ class polyLibrary extends PolyMod {
             overflow-y: scroll;
             pointer-events: auto;
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
             gap: 20px;
             padding: 20px;
             flex: 1;
@@ -811,6 +811,8 @@ class polyLibrary extends PolyMod {
     }
 
     createVersions = async function(thisMod, modId) {
+        this.vers.classList.add("created");
+
         const modUrl = thisMod.baseUrl
         const path = new URL(modUrl).pathname;
         const hoster = modUrl.includes("pml.crjakob.com") ? "cb" : modUrl.includes("pml.orangy.cfd") ? "gh" : () => {throw new Error("Unknown hoster")};
@@ -925,7 +927,6 @@ class polyLibrary extends PolyMod {
             return "";
         }
 
-        this.vers.classList.add("created");
     }
 
     createChangelog = async function(thisMod) {
