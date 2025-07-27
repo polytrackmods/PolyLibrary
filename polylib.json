@@ -6,6 +6,9 @@
     ],
     "0.1.0": [
       "Updated mod to PolyTrack version 0.5.1"
+    ],
+    "0.1.1": [
+      "Fixed non updated mod icons not loading"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
