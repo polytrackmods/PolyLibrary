@@ -6,14 +6,16 @@
     ],
     "0.0.2": [
       "Fixed reverse list order in versions tab",
-      "Added fix for potential future error location (mod icon)"
+      "Added fix for potential future error location (mod icon)",
+      "Fixed bug where versions tab contents are created multiple times"
     ],
     "0.1.0": [
       "Updated mod to support PolyTrack version 0.5.1"
     ],
     "0.1.1": [
       "Fixed non updated mod icons not loading",
-      "Fixed reverse list order in versions tab"
+      "Fixed reverse list order in versions tab",
+      "Fixed bug where versions tab contents are created multiple times"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
