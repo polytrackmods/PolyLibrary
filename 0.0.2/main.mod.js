@@ -815,6 +815,8 @@ class polyLibrary extends PolyMod {
     }
 
     createVersions = async function(thisMod, modId) {
+        this.vers.classList.add("created");
+        
         const modUrl = thisMod.baseUrl
         const path = new URL(modUrl).pathname;
         const hoster = modUrl.includes("pml.crjakob.com") ? "cb" : modUrl.includes("pml.orangy.cfd") ? "gh" : () => {throw new Error("Unknown hoster")};
@@ -929,7 +931,6 @@ class polyLibrary extends PolyMod {
             return "";
         }
 
-        this.vers.classList.add("created");
     }
 
     createChangelog = async function(thisMod) {
