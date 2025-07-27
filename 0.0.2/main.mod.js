@@ -389,7 +389,15 @@ class polyLibrary extends PolyMod {
 
         this.listDiv.appendChild(entry)
 
-        entry.appendChild(modIcon);
+        if (modIcon instanceof Node) {
+            entry.appendChild(modIcon);
+        } else {
+            modIcon = document.createElement("img");
+            modIcon.src = "./images/empty.svg";
+            modIcon.style.height = "150px";
+
+            entry.appendChild(modIcon);
+        }
 
         const bigDiv = document.createElement("div");
         bigDiv.className = "content-div";
@@ -495,9 +503,13 @@ class polyLibrary extends PolyMod {
             const version = latest[polyVersion];
             if (!version) {
                 console.warn(`No version found for polyVersion ${polyVersion} in mod ${modId}`);
+                const img = document.createElement("img");
+                img.src = latest[Object.keys(latest)[Object.keys(latest).length - 1]];
+                img.style.height = "150px"
+
+                this.iconMap[modId] = img;
                 continue;
             }
-    
            
             const baseUrl = modInfo.baseUrl;
             const iconUrl = `${baseUrl}/${version}/icon.png`;
