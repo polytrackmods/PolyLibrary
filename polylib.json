@@ -12,7 +12,8 @@
       "Updated mod to support PolyTrack version 0.5.1"
     ],
     "0.1.1": [
-      "Fixed non updated mod icons not loading"
+      "Fixed non updated mod icons not loading",
+      "Fixed reverse list order in versions tab"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
