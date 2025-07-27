@@ -4,8 +4,12 @@
       "Fixed changelog list UI not scrolling (overflow)",
       "Changed background color of logo to orange"
     ],
+    "0.0.2": [
+      "Fixed reverse list order in versions tab",
+      "Added fix for potential future error location (mod icon)"
+    ],
     "0.1.0": [
-      "Updated mod to PolyTrack version 0.5.1"
+      "Updated mod to support PolyTrack version 0.5.1"
     ],
     "0.1.1": [
       "Fixed non updated mod icons not loading"
