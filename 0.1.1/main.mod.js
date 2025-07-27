@@ -179,7 +179,7 @@ class polyLibrary extends PolyMod {
         .changelog-list {
             flex: 1;
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
             padding: 20px;
             gap: 40px;
@@ -500,15 +500,10 @@ class polyLibrary extends PolyMod {
                 console.warn(`No latest info for mod ${modId}`);
                 continue;
             }
-            const version = latest[polyVersion];
+            let version = latest[polyVersion];
             if (!version) {
                 console.warn(`No version found for polyVersion ${polyVersion} in mod ${modId}`);
-                const img = document.createElement("img");
-                img.src = latest[Object.keys(latest)[Object.keys(latest).length - 1]];
-                img.style.height = "150px"
-
-                this.iconMap[modId] = img;
-                continue;
+                version = latest[Object.keys(latest)[Object.keys(latest).length - 1]];
             }
     
            
