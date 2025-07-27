@@ -5,7 +5,7 @@
       "Changed background color of logo to orange"
     ],
     "0.0.2": [
-      "Fixed reverse list order in versions tab",
+      "Fixed reverse list order in changelogs tab",
       "Added fix for potential future error location (mod icon)",
       "Fixed bug where versions tab contents are created multiple times",
       "Added lower opacity mod entries for mods that don't support your PML version"
@@ -15,7 +15,7 @@
     ],
     "0.1.1": [
       "Fixed non updated mod icons not loading",
-      "Fixed reverse list order in versions tab",
+      "Fixed reverse list order in changelogs tab",
       "Fixed bug where versions tab contents are created multiple times",
       "Added lower opacity mod entries for mods that don't support your PML version"
     ]
