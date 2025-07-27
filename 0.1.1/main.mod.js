@@ -381,6 +381,9 @@ class polyLibrary extends PolyMod {
         const tags = modLatest.mods[modId].tags;
 
         const entry = document.createElement("button");
+        if (!(this.polyVersion[0] in modVersions)) {
+            entry.style.opacity = "0.5";
+        }
         entry.className = `library-entry button ${tags.join(" ")}`;
         entry.onclick = () => {
             document.getElementById("library-div").style.display = "none";
