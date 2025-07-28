@@ -985,7 +985,7 @@ class polyLibrary extends PolyMod {
     addMod = function(modurl, modversion="latest") {
         const autoUpd = false;
         if (modVersion === "latest") {autoUpd = true}
-        this.apml.addMod({ base: modurl, version: modversion, loaded: true }, autoUpdate: autoUpd)
+        this.apml.addMod({ base: modurl, version: modversion, loaded: true }, autoUpd)
         .then(mod => {
             this.apml.setModLoaded(mod, true);
             console.info(`✅ Successfully imported: ${modurl}`);
