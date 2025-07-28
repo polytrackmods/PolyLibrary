@@ -940,6 +940,7 @@ class polyLibrary extends PolyMod {
         loader.textContent = "Loading Changelogs...";
 
         this.changelog.appendChild(loader);
+        this.changelog.scrollTop = "0";
         
         fetch(url)
           .then((res) => {
