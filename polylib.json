@@ -8,6 +8,7 @@
       "Fixed reverse list order in changelogs tab",
       "Added fix for potential future error location (mod icon)",
       "Fixed bug where versions tab contents are created multiple times",
+      "Fixed changelog scroll at bottom bug",
       "Added lower opacity mod entries for mods that don't support your PML version"
     ],
     "0.1.0": [
@@ -17,6 +18,7 @@
       "Fixed non updated mod icons not loading",
       "Fixed reverse list order in changelogs tab",
       "Fixed bug where versions tab contents are created multiple times",
+      "Fixed changelog scroll at bottom bug",
       "Added lower opacity mod entries for mods that don't support your PML version"
     ]
   },
