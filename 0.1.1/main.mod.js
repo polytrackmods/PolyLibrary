@@ -1,7 +1,6 @@
 import { PolyMod, MixinType } from "https://pml.orangy.cfd/PolyTrackMods/PolyModLoader/0.5.1/PolyModLoader.js";
 
 class polyLibrary extends PolyMod {
-
     listDiv;
     tagDiv;
     loader;
