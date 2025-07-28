@@ -983,7 +983,7 @@ class polyLibrary extends PolyMod {
     };
 
     addMod = function(modurl, modversion="latest") {
-        const autoUpd = false;
+        let autoUpd = false;
         if (modversion === "latest") {autoUpd = true}
         this.apml.addMod({ base: modurl, version: modversion, loaded: true }, autoUpd)
         .then(mod => {
