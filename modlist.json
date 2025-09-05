@@ -1,78 +1,78 @@
 {
   "polyproxy": {
-    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/polyproxy",
+    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/polyproxy",
     "name": "Poly Proxy",
     "author": "Orangy",
     "tags": ["Other"]
   },
   "3decspeed": {
-    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/3decspeed",
+    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/3decspeed",
     "name": "3 Decimal Speedometer",
     "author": "Sebas + Orangy",
     "tags": ["UI"]
   },
   "coolcars": {
-    "url": "https://pml.crjakob.com/CRJakob/jakobspolymods/main/coolcars",
+    "url": "https://pml.crjakob.com/cb/CRJakob/jakobspolymods/main/coolcars",
     "name": "Cool Cars",
     "author": "CRJakob",
     "tags": ["Car"]
   },
   "goofycars": {
-    "url": "https://pml.crjakob.com/CRJakob/jakobspolymods/main/goofycars",
+    "url": "https://pml.crjakob.com/cb/CRJakob/jakobspolymods/main/goofycars",
     "name": "Goofy Cars",
     "author": "CRJakob",
     "tags": ["Car"]
   },
   "husplits": {
-    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/husplits",
+    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/husplits",
     "name": "Heads Up Splits",
     "author": "Orangy",
     "tags": ["UI"]
   },
   "noitalics": {
-    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/noitalics",
+    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/noitalics",
     "name": "No Italics",
     "author": "Orangy",
     "tags": ["UI"]
   },
   "polydebug": {
-    "url": "https://pml.crjakob.com/GameBuilder202/PolyDebug/main",
+    "url": "https://pml.crjakob.com/cb/GameBuilder202/PolyDebug/main",
     "name": "PolyDebug",
     "author": "Aeritalia",
     "tags": ["UI", "Other"]
   },
   "polyeditor": {
-    "url": "https://pml.crjakob.com/polytrackmods/PolyEditor/main/",
+    "url": "https://pml.crjakob.com/cb/polytrackmods/PolyEditor/main/",
     "name": "Advanced PolyEditor",
     "author": "Cwcinc + CRJakob + Orangy",
     "tags": ["Editor"]
   },
   "carswitcher": {
-    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/carswitcher",
+    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/carswitcher",
     "name": "Car Switcher",
     "author": "Orangy",
     "tags": ["Car"]
   },
   "ghosttoggle": {
-    "url": "https://pml.orangy.cfd/0rangy/OrangysPolyMods/main/ghosttoggle",
+    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/ghosttoggle",
     "name": "Mid Run Ghost Toggle",
     "author": "Cwcinc + Orangy",
     "tags": ["Car"]
   },
   "pdip": {
-    "url": "https://pml.orangy.cfd/polytrackmods/PolyDip--/main",
+    "url": "https://pml.crjakob.com/gh/polytrackmods/PolyDip--/main",
     "name": "PolyDip--",
     "author": "DoraChad + Orangy",
     "tags": ["UI", "Other"]
   },
   "plibrary": {
-    "url": "https://pml.orangy.cfd/polytrackmods/PolyLibrary/main",
+    "url": "https://pml.crjakob.com/gh/polytrackmods/PolyLibrary/main",
     "name": "Poly Library",
     "author": "DoraChad",
     "tags": ["Other"]
   },
   "pmlcore": {
-    "url": "https://pml.crjakob.com/polytrackmods/PolyModLoader/pmlcore",
+    "url": "https://pml.crjakob.com/cb/polytrackmods/PolyModLoader/pmlcore",
     "name": "PML Core",
     "author": "Orangy",
     "tags": ["Other"]
