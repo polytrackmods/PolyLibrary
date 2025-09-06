@@ -816,9 +816,10 @@ class polyLibrary extends PolyMod {
         this.vers.classList.add("created");
 
         const modUrl = thisMod.baseUrl
-        const path = new URL(modUrl).pathname;
-        const hoster = modUrl.startsWith("https://pml.crjakob.com") ? new URL(modUrl).pathname.split("/")[1] || (() => { throw new Error("Missing path segment"); })() : modUrl.startsWith("https://pml.orangy.cfd") ? "gh" : (() => { throw new Error("Unknown hoster"); })();
-        const url = `https://pml.crjakob.com/${hoster}${path}`
+        // const path = new URL(modUrl).pathname;
+        // const hoster = modUrl.startsWith("https://pml.crjakob.com") ? new URL(modUrl).pathname.split("/")[1] || (() => { throw new Error("Missing path segment"); })() : modUrl.startsWith("https://pml.orangy.cfd") ? "gh" : (() => { throw new Error("Unknown hoster"); })();
+        // const url = `https://pml.crjakob.com/${hoster}${path}`
+        const url = modUrl;
 
         const loader = document.createElement("p");
         loader.textContent = "Loading Version History..."
