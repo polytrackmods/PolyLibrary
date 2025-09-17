@@ -23,6 +23,12 @@
     "author": "CRJakob",
     "tags": ["Car"]
   },
+  "polyblocks": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyBlocks",
+    "name": "PolyBlocks(BETA)",
+    "author": "CRJakob",
+    "tags": ["Editor", "Other"]
+  },
   "husplits": {
     "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/husplits",
     "name": "Heads Up Splits",
