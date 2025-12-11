@@ -71,6 +71,12 @@
     "author": "DoraChad + Orangy",
     "tags": ["UI", "Other"]
   },
+  "pmlapi": {
+    "url": "https://pml.crjakob.com/cb/polytrackmods/PolyModLoader/pmlapi",
+    "name": "PML API",
+    "author": "Orangy",
+    "tags": ["Other"]
+  },
   "plibrary": {
     "url": "https://pml.crjakob.com/gh/polytrackmods/PolyLibrary/main",
     "name": "Poly Library",
