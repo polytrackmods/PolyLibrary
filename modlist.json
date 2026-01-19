@@ -1,92 +1,150 @@
 {
   "polyproxy": {
-    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/polyproxy",
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/polyproxy",
     "name": "Poly Proxy",
     "author": "Orangy",
-    "tags": ["Other"]
+    "tags": [
+      "Other"
+    ]
+  },
+  "polyproxy_backup": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyproxy",
+    "name": "Poly Proxy(Backup)",
+    "author": "Orangy, Jakob",
+    "tags": [
+      "Other"
+    ]
   },
   "3decspeed": {
-    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/3decspeed",
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/3decspeed",
     "name": "3 Decimal Speedometer",
     "author": "Sebas + Orangy",
-    "tags": ["UI"]
+    "tags": [
+      "UI"
+    ]
   },
   "coolcars": {
-    "url": "https://pml.crjakob.com/cb/CRJakob/jakobspolymods/main/coolcars",
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/coolcars",
     "name": "Cool Cars",
-    "author": "CRJakob",
-    "tags": ["Car"]
+    "author": "Jakob",
+    "tags": [
+      "Car"
+    ]
   },
   "goofycars": {
-    "url": "https://pml.crjakob.com/cb/CRJakob/jakobspolymods/main/goofycars",
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/goofycars",
     "name": "Goofy Cars",
-    "author": "CRJakob",
-    "tags": ["Car"]
+    "author": "Jakob",
+    "tags": [
+      "Car"
+    ]
   },
   "polyblocks": {
     "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyBlocks",
     "name": "PolyBlocks(BETA)",
-    "author": "CRJakob",
-    "tags": ["Editor", "Other"]
+    "author": "Jakob",
+    "tags": [
+      "Editor",
+      "Other"
+    ]
+  },
+  "polyprocessing": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyproccesing",
+    "name": "PolyProcessing (Alpha)",
+    "author": "Jakob",
+    "tags": [
+      "Graphical",
+      "Other"
+    ]
   },
   "husplits": {
-    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/husplits",
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/husplits",
     "name": "Heads Up Splits",
     "author": "Orangy",
-    "tags": ["UI"]
+    "tags": [
+      "UI"
+    ]
+  },
+  "inputoverlay": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/inputOverlay",
+    "name": "Input Overlay",
+    "author": "Jakob",
+    "tags": [
+      "UI"
+    ]
   },
   "noitalics": {
-    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/noitalics",
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/noitalics",
     "name": "No Italics",
     "author": "Orangy",
-    "tags": ["UI"]
+    "tags": [
+      "UI"
+    ]
   },
   "polydebug": {
-    "url": "https://pml.crjakob.com/cb/GameBuilder202/PolyDebug/main",
+    "url": "https://cdn.polymodloader.com/cb/GameBuilder202/PolyDebug/main",
     "name": "PolyDebug",
     "author": "Aeritalia",
-    "tags": ["UI", "Other"]
+    "tags": [
+      "UI",
+      "Other"
+    ]
   },
   "polyeditor": {
-    "url": "https://pml.crjakob.com/cb/polytrackmods/PolyEditor/main/",
+    "url": "https://cdn.polymodloader.com/cb/polytrackmods/PolyEditor/main/",
     "name": "Advanced PolyEditor",
-    "author": "Cwcinc + CRJakob + Orangy",
-    "tags": ["Editor"]
+    "author": "Cwcinc + Jakob + Orangy",
+    "tags": [
+      "Editor"
+    ]
   },
   "carswitcher": {
-    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/carswitcher",
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/carswitcher",
     "name": "Car Switcher",
     "author": "Orangy",
-    "tags": ["Car"]
+    "tags": [
+      "Car"
+    ]
   },
   "ghosttoggle": {
-    "url": "https://pml.crjakob.com/gh/0rangy/OrangysPolyMods/main/ghosttoggle",
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/ghosttoggle",
     "name": "Mid Run Ghost Toggle",
     "author": "Cwcinc + Orangy",
-    "tags": ["Car"]
+    "tags": [
+      "Car"
+    ]
   },
   "pdip": {
-    "url": "https://pml.crjakob.com/gh/polytrackmods/PolyDip--/main",
+    "url": "https://cdn.polymodloader.com/gh/polytrackmods/PolyDip--/main",
     "name": "PolyDip--",
     "author": "DoraChad + Orangy",
-    "tags": ["UI", "Other"]
+    "tags": [
+      "UI",
+      "Other"
+    ]
   },
   "pmlapi": {
-    "url": "https://pml.crjakob.com/cb/polytrackmods/PolyModLoader/pmlapi",
+    "url": "https://cdn.polymodloader.com/cb/polytrackmods/PolyModLoader/pmlapi",
     "name": "PML API",
     "author": "Orangy",
-    "tags": ["Other"]
+    "tags": [
+      "Other"
+    ]
   },
   "plibrary": {
-    "url": "https://pml.crjakob.com/gh/polytrackmods/PolyLibrary/main",
+    "url": "https://cdn.polymodloader.com/gh/polytrackmods/PolyLibrary/main",
     "name": "Poly Library",
     "author": "DoraChad",
-    "tags": ["Other"]
+    "tags": [
+      "Other"
+    ]
   },
   "pmlcore": {
-    "url": "https://pml.crjakob.com/cb/polytrackmods/PolyModLoader/pmlcore",
+    "url": "https://cdn.polymodloader.com/cb/polytrackmods/PolyModLoader/pmlcore",
     "name": "PML Core",
     "author": "Orangy",
-    "tags": ["Other"]
+    "tags": [
+      "Other"
+    ]
   }
 }
