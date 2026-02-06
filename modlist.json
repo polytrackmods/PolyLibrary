@@ -53,8 +53,16 @@
     "name": "PolyProcessing (Alpha)",
     "author": "Jakob",
     "tags": [
+      "Graphical"
+    ]
+  },
+  "polycinema": {
+    "url": "https://cdn.polymodloader.com/gh/HeroHunterIguess/polycinema/main/",
+    "name": "PolyCinema (beta)",
+    "author": "Hero, Jakob",
+    "tags": [
       "Graphical",
-      "Other"
+      "UI"
     ]
   },
   "husplits": {
