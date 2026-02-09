@@ -27,6 +27,7 @@
       "Version fetching in parallel implemented for faster loading",
       "Dependencies auto installed when found within PolyLibrary",
       "Mod info when update detected",
+      "Short description implemented",
       "One mod version for all game versions"
     ]
   },
