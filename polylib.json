@@ -22,6 +22,12 @@
       "Added lower opacity mod entries for mods that don't support your PML version"
     ],"0.1.5": [
       "Updated mod to support PolyTrack version 0.5.2"
+    ],"0.1.6": [
+      "Re-organized/implemented code",
+      "Version fetching in parallel implemented for faster loading",
+      "Dependencies auto installed when found within PolyLibrary",
+      "Mod info when update detected",
+      "One mod version for all game versions"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
