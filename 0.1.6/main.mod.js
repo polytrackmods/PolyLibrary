@@ -1139,7 +1139,7 @@ class polyLibrary extends PolyMod {
             ActivePolyModLoader.getMod("${this.modID}").initMod();
         `);
 
-        console.log(window.pmlversion, cleanVersion(window.pmlversion))
+        console.log(window.pmlversion, this.cleanVersion(window.pmlversion))
 
         let mixinLocation = "mN";
         if (this.cleanVersion(window.pmlversion) === "0.5.2") {
