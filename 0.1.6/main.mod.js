@@ -1136,7 +1136,7 @@ class polyLibrary extends PolyMod {
         `);
 
         this.gameVersion = "0.5.2";
-        console.log(this);
+        console.log(this, window.ActivePolyModLoader, window.ActivePolyModLoader.polyVersion);
 
         let mixinLocation = "mN";
         if (this.gameVersion === "0.5.2") {
