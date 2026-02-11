@@ -1135,17 +1135,8 @@ class polyLibrary extends PolyMod {
             ActivePolyModLoader.getMod("${this.modID}").initMod();
         `);
 
-        this.gameVersion = "0.5.0";
-
-        let mixinLocation = "mN";
-        if (this.gameVersion === "0.5.2") {
-            mixinLocation = "mN";
-        } else if (this.gameVersion === "0.5.1") {
-            mixinLocation = "bN";
-        } else {
-            mixinLocation = "hD";
-        }
-        pml.registerFuncMixin("mixinLocation", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
+        this.gameVersion = "0.5.1";
+        pml.registerFuncMixin("bN", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
             ActivePolyModLoader.getMod("${this.modID}").soundInst = n;
             ActivePolyModLoader.getMod("${this.modID}").menuUI();
             ActivePolyModLoader.getMod("${this.modID}").createMutation();

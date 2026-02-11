@@ -2,6 +2,7 @@ import { PolyMod, MixinType } from "https://pml.crjakob.com/cb/PolyTrackMods/Pol
 
 class polyLibrary extends PolyMod {
     soundInst;
+    apml;
     initMod = function() {
         const uistyle = document.createElement("style");
         uistyle.textContent = `
@@ -1132,20 +1133,15 @@ class polyLibrary extends PolyMod {
     }
     init = (pml) => {  
         pml.getFromPolyTrack(`
+            ActivePolyModLoader.getMod("${this.modID}").apml = ActivePolyModLoader;
             ActivePolyModLoader.getMod("${this.modID}").initMod();
         `);
 
-        this.gameVersion = "0.5.0";
+        this.gameVersion = "0.5.2";
+        console.log(this.apml);
 
-        let mixinLocation = "mN";
-        if (this.gameVersion === "0.5.2") {
-            mixinLocation = "mN";
-        } else if (this.gameVersion === "0.5.1") {
-            mixinLocation = "bN";
-        } else {
-            mixinLocation = "hD";
-        }
-        pml.registerFuncMixin("mixinLocation", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
+
+        pml.registerFuncMixin("mN", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
             ActivePolyModLoader.getMod("${this.modID}").soundInst = n;
             ActivePolyModLoader.getMod("${this.modID}").menuUI();
             ActivePolyModLoader.getMod("${this.modID}").createMutation();
