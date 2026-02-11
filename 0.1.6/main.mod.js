@@ -737,13 +737,13 @@ class polyLibrary extends PolyMod {
                 const importing = [];
                 const missing = [];
                 
-                importing.push(modId);
+                importing.push(modId + "v" + modversion);
                 
                 for (const dep of data.dependencies) {
                     if (this.fullModList[dep.id]) {
-                        importing.push(dep.id);
+                        importing.push(dep.id + "v" + dep.version);
                     } else {
-                        missing.push(dep.id);
+                        missing.push(dep.id + "v" + dep.version);
                     }
                 }
                 
@@ -1130,15 +1130,19 @@ class polyLibrary extends PolyMod {
         const targetElement = document.getElementsByClassName("main-buttons-container")[0];
         observer.observe(targetElement, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
     }
+    cleanVersion = function(version="v0.5.0") {
+        const match = version.match(/\d+\.\d+\.\d+/);
+        return match ? match[0] : null;
+    }
     init = (pml) => {  
         pml.getFromPolyTrack(`
             ActivePolyModLoader.getMod("${this.modID}").initMod();
         `);
 
         let mixinLocation = "mN";
-        if (window.ActivePolyModLoader.polyVersion === "0.5.2") {
+        if (cleanVersion(window.polyVersion) === "0.5.2") {
             mixinLocation = "mN";
-        } else if (window.ActivePolyModLoader.polyVersion === "0.5.1") {
+        } else if (cleanVersion(window.polyVersion) === "0.5.1") {
             mixinLocation = "bN";
         } else {
             mixinLocation = "hD";
