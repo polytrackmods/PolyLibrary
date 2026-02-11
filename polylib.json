@@ -26,8 +26,7 @@
       "Re-organized/implemented code",
       "Version fetching in parallel implemented for faster loading",
       "Dependencies auto installed when found within PolyLibrary",
-      "Short description implemented",
-      "One mod version for all game versions"
+      "Short description implemented"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
