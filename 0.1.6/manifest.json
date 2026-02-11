@@ -3,7 +3,7 @@
         "name": "Poly Library",
         "id": "plibrary",
         "author": "DoraChad",
-        "targets": ["0.5.2"], 
+        "targets": ["0.5.2", "0.5.1", "0.5.0"], 
         "main": "main.mod.js"
     },
     "dependencies": []

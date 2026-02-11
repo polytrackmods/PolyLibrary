@@ -26,6 +26,7 @@
       "Re-organized/implemented code",
       "Version fetching in parallel implemented for faster loading",
       "Dependencies auto installed when found within PolyLibrary",
+      "One mod version for all game versions",
       "Short description implemented"
     ]
   },

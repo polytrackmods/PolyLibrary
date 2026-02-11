@@ -2,6 +2,7 @@ import { PolyMod, MixinType } from "https://pml.crjakob.com/cb/PolyTrackMods/Pol
 
 class polyLibrary extends PolyMod {
     soundInst;
+    apml;
     initMod = function() {
         const uistyle = document.createElement("style");
         uistyle.textContent = `
@@ -283,7 +284,7 @@ class polyLibrary extends PolyMod {
         backButton.innerHTML = `<img src="images/back.svg"> Back`;
         backButton.onclick = () => {
             baseDiv.remove();
-            window.ActivePolyModLoader.getMod("pmlcore").createModScreen(this.soundInst);
+            this.apml.getMod("pmlcore").createModScreen(this.soundInst);
             this.menuUI();
         };
 
@@ -506,15 +507,15 @@ class polyLibrary extends PolyMod {
         addButton.className =  "library-add-button button";
         addButton.style.marginLeft = "auto";
         addButton.innerHTML = `<img src="images/apply.svg"> Add`;
-        addButton.onclick = async () => {await this.getDependencies(modId, thisMod.baseUrl, thisMod.latest[Activewindow.ActivePolyModLoaderPolyModLoader.polyVersion], true)};
+        addButton.onclick = async () => {await this.getDependencies(modId, thisMod.baseUrl, thisMod.latest[this.apml.polyVersion], true)};
 
         topDiv.appendChild(addButton);
 
-        for (let polyMod of window.ActivePolyModLoader.getAllMods()) {
+        for (let polyMod of this.apml.getAllMods()) {
             console.log(polyMod);
         }
         
-        if (window.ActivePolyModLoader.getMod(modId)) {
+        if (this.apml.getMod(modId)) {
             addButton.disabled = true;
             addButton.style.cursor = "not-allowed"
         };
@@ -723,7 +724,7 @@ class polyLibrary extends PolyMod {
 
                     
                     data.dependencies.forEach(async (dep) => {
-                        if (!window.ActivePolyModLoader.getMod(dep.id)) {
+                        if (!this.apml.getMod(dep.id)) {
                             if (this.fullModList[dep.id]) {
                                 await this.addMod(this.fullModList[dep.id].url, dep.version, autoUpd);        
                             }
@@ -773,10 +774,10 @@ class polyLibrary extends PolyMod {
         }
         
         if (modversion === "latest") {autoUpd = true}
-        window.ActivePolyModLoader.addMod({ base: modurl, version: modversion, loaded: true }, autoUpd)
+        this.apml.addMod({ base: modurl, version: modversion, loaded: true }, autoUpd)
         .then(mod => {
-            window.ActivePolyModLoader.setModLoaded(mod, true);
-            window.ActivePolyModLoader.getMod("pmlcore").createModScreen(this.soundInst);
+            this.apml.setModLoaded(mod, true);
+            this.apml.getMod("pmlcore").createModScreen(this.soundInst);
             this.menuUI();
         })
         .catch(err => {
@@ -1070,7 +1071,7 @@ class polyLibrary extends PolyMod {
                     addButton.style.width = "130px";
                     addButton.style.fontSize = "25px";
     
-                    if (window.ActivePolyModLoader.getMod(modId)) {
+                    if (this.apml.getMod(modId)) {
                         addButton.disabled = true;
                         addButton.style.cursor = "not-allowed";
                     }
@@ -1132,12 +1133,23 @@ class polyLibrary extends PolyMod {
     }
     init = (pml) => {  
         pml.getFromPolyTrack(`
+            ActivePolyModLoader.getMod("${this.modID}").apml = ActivePolyModLoader;
             ActivePolyModLoader.getMod("${this.modID}").initMod();
         `);
 
-        this.gameVersion = "0.5.0";
+        this.gameVersion = this.apml.polyVersion;
+        console.log(this.apml);
 
-        pml.registerFuncMixin("hD", MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
+        let mixinLocation;
+        if (this.gameVersion === "0.5.2") {
+            mixinLocation = "mN";
+        } else if (this.gameVersion === "0.5.1") {
+            mixinLocation = "bN";
+        } else {
+            mixinLocation = "hD";
+        }
+
+        pml.registerFuncMixin(mixinLocation, MixinType.INSERT, 'if (polyMod.id === "pmlcore") {', `
             ActivePolyModLoader.getMod("${this.modID}").soundInst = n;
             ActivePolyModLoader.getMod("${this.modID}").menuUI();
             ActivePolyModLoader.getMod("${this.modID}").createMutation();
