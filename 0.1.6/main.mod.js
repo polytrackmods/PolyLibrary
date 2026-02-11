@@ -381,7 +381,7 @@ class polyLibrary extends PolyMod {
         const shortDesc = modLatest.mods[modId].shortDesc;
 
         const entry = document.createElement("button");
-        if (!(window.ActivePolyModLoader.polyVersion in modVersions)) {
+        if (!(this.gameVersion in modVersions)) {
             entry.style.opacity = "0.5";
             entry.disabled = true;
             entry.style.cursor = "not-allowed"
@@ -678,7 +678,7 @@ class polyLibrary extends PolyMod {
     };
     getIcons = function(mods) {
         if (this.iconMap) return this.iconMap;
-        const polyVersion = window.ActivePolyModLoader.polyVersion;
+        const polyVersion = this.gameVersion;
         this.iconMap = {};
     
         for (const [modId, modInfo] of Object.entries(mods)) {
@@ -1076,7 +1076,7 @@ class polyLibrary extends PolyMod {
                     }
     
                     if (
-                        !data.polymod.targets.includes(window.ActivePolyModLoader.polyVersion) ||
+                        !data.polymod.targets.includes(this.gameVersion) ||
                         data.polymod?.locked === true
                     ) {
                         addButton.disabled = true;
@@ -1130,21 +1130,18 @@ class polyLibrary extends PolyMod {
         const targetElement = document.getElementsByClassName("main-buttons-container")[0];
         observer.observe(targetElement, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
     }
-    cleanVersion = function(version="v0.5.0") {
-        const match = version.match(/\d+\.\d+\.\d+/);
-        return match ? match[0] : null;
-    }
     init = (pml) => {  
         pml.getFromPolyTrack(`
             ActivePolyModLoader.getMod("${this.modID}").initMod();
         `);
 
-        console.log(window.pmlversion, this.cleanVersion(window.pmlversion))
+        this.gameVersion = "0.5.2";
+        console.log(this);
 
         let mixinLocation = "mN";
-        if (this.cleanVersion(window.pmlversion) === "0.5.2") {
+        if (this.gameVersion === "0.5.2") {
             mixinLocation = "mN";
-        } else if (this.cleanVersion(window.pmlversion) === "0.5.1") {
+        } else if (this.gameVersion === "0.5.1") {
             mixinLocation = "bN";
         } else {
             mixinLocation = "hD";
