@@ -761,6 +761,8 @@ class polyLibrary extends PolyMod {
                 
                 this.confirmPopup(message, () => {}, confirm)
             } else {
+                document.getElementById("mod-div").remove();
+                document.getElementById("library-div").remove();
                 await this.addMod(modurl, modversion, autoUpd);
             }
             
