@@ -1140,9 +1140,9 @@ class polyLibrary extends PolyMod {
         `);
 
         let mixinLocation = "mN";
-        if (cleanVersion(window.polyVersion) === "0.5.2") {
+        if (this.cleanVersion(window.polyVersion) === "0.5.2") {
             mixinLocation = "mN";
-        } else if (cleanVersion(window.polyVersion) === "0.5.1") {
+        } else if (this.cleanVersion(window.polyVersion) === "0.5.1") {
             mixinLocation = "bN";
         } else {
             mixinLocation = "hD";
