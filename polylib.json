@@ -28,6 +28,8 @@
       "Dependencies auto installed when found within PolyLibrary",
       "One mod version for all game versions",
       "Short description implemented"
+    ],"0.1.7": [
+      "Implemented hashing checks when importing mods"
     ]
   },
   "shortdesc": "A mod which allows you to see a library of other PolyModLoader mods along with additional info such as changelog and version info."
