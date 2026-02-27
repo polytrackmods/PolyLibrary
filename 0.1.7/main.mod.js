@@ -809,7 +809,15 @@ class polyLibrary extends PolyMod {
         }
 
         if (!result) {
-            this.confirmPopup("This mod has not been verified as safe yet. Are you sure you want to import it?", () => {return false;}, () => {return true;});
+            const userConfirm = await new Promise((resolve) => {
+                this.confirmPopup(
+                    "This mod has not been verified as safe yet. Are you sure you want to import it?",
+                    () => resolve(false),
+                    () => resolve(true)
+                );
+            });
+
+            return userConfirm;
         } else {
             return true;
         };
