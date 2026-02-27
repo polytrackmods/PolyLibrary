@@ -810,9 +810,9 @@ class polyLibrary extends PolyMod {
 
         if (!result) {
             this.confirmPopup("This mod has not been verified as safe yet. Are you sure you want to import it?", () => {return false;}, () => {return true;});
-        }
-
-        return true;
+        } else {
+            return true;
+        };
         
     }
     addMod = async function(modurl, modversion, autoUpd, modId) {
