@@ -830,7 +830,11 @@ class polyLibrary extends PolyMod {
             return;
         };
 
-        if (!await this.verifyModHash(modurl, modversion, modId)) return;
+        if (!await this.verifyModHash(modurl, modversion, modId)) {
+            this.apml.getMod("pmlcore").createModScreen(this.soundInst);
+            this.menuUI();
+            return;
+        };
 
         if (modurl.endsWith('/')) {
             modurl = modurl.slice(0, -1);
