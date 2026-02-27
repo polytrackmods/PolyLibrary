@@ -815,7 +815,7 @@ class polyLibrary extends PolyMod {
     }
     addMod = async function(modurl, modversion, autoUpd, modId) {
 
-        if (modversion="latest") {
+        if (modversion === "latest") {
             console.warn("Requested to add mod version latest, which is not supported in the current PolyLibrary system.");
             return;
         };
