@@ -789,7 +789,7 @@ class polyLibrary extends PolyMod {
     verifyModHash = async function(url, version, modId) {
         let result = false;
 
-        const scriptHash = await getModHash(url, version);
+        const scriptHash = await this.getModHash(url, version);
 
         const response = await fetch("https://raw.githubusercontent.com/polytrackmods/PolyLibrary/refs/heads/main/mod_hashes.json");
         if (!response.ok) {
@@ -820,13 +820,12 @@ class polyLibrary extends PolyMod {
             return;
         };
 
-        if (!await verifyModHash(modurl, modversion, modId)) return;
+        if (!await this.verifyModHash(modurl, modversion, modId)) return;
 
         if (modurl.endsWith('/')) {
             modurl = modurl.slice(0, -1);
         }
         
-        if (modversion === "latest") {autoUpd = true}
         this.apml.addMod({ base: modurl, version: modversion, loaded: true }, autoUpd)
         .then(mod => {
             this.apml.setModLoaded(mod, true);
