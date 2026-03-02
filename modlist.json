@@ -39,6 +39,14 @@
       "Car"
     ]
   },
+  "f1cars": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/f1cars",
+    "name": "F1 Cars",
+    "author": "Jakob",
+    "tags": [
+      "Car"
+    ]
+  },
   "polyblocks": {
     "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyBlocks",
     "name": "PolyBlocks(BETA)",
