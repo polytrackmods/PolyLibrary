@@ -7,14 +7,6 @@
       "Other"
     ]
   },
-  "polyproxy_backup": {
-    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyproxy",
-    "name": "Poly Proxy(Backup)",
-    "author": "Orangy, Jakob",
-    "tags": [
-      "Other"
-    ]
-  },
   "3decspeed": {
     "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/3decspeed",
     "name": "3 Decimal Speedometer",
@@ -57,8 +49,16 @@
     ]
   },
   "polyprocessing": {
-    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/polyprocessing",
-    "name": "PolyProcessing (Alpha)",
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/PolyProcessing/main/",
+    "name": "PolyProcessing",
+    "author": "Jakob",
+    "tags": [
+      "Graphical"
+    ]
+  },
+  "xenon": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/Xenon/main/",
+    "name": "Xenon",
     "author": "Jakob",
     "tags": [
       "Graphical"
